@@ -4,10 +4,14 @@
   require_once('CountSmsParts.php');
 
 
-  // Your API-KEY or token which you can obtain here: https://app.sms.by/user-api/token
-  $token = 'e34d5beb2af5f53259f24b4319c6df2b';  // Код токена вы можете получить здесь: https://app.sms.by/user-api/token
-  // Phone number where you will receive all test sms
-  $phone = '+375445493507';  // Номер телефона для теста
+// Your API-KEY or token which you can obtain here: https://app.sms.by/user-api/token
+$token = 'e34d5beb2af5f53259f24b4319c6df2b';  // Код токена вы можете получить здесь: https://app.sms.by/user-api/token
+// Phone number where you will receive all test sms
+$phone = '+375445493507';  // Номер телефона для теста
+
+
+
+
 
 
   $text = "Заглавная буква в начале текста"; // place here any sample text
@@ -23,20 +27,50 @@
 
   $sms = new SMS_BY($token);
 
+
+function enter($phone)
+{
+    include "../ajax/connection.php";
+    ini_set("session.use_trans_sid", true);
+
+    session_start();
+    if ($phone != "") {
+
+        if (true) {
+
+            $message = "Hello World! Powered by SMS.by";
+
+            $insertquery = "SELECT * FROM users WHERE phone='$phone'";
+
+            $rez = mysqli_query($con, $insertquery) or die("Ошибка " . mysqli_error($con));
+
+            if (mysqli_num_rows($rez) == 1) //если нашлась одна строка, значит такой юзер существует в базе данных
+            {
+                $row = mysqli_fetch_assoc($rez);
+                $_SESSION['id_user'] = $row['id_user'];
+                $id = $_SESSION['id_user'];
+                setcookie("login", $phone, time() + 1800, '/');
+                setcookie("id_user", $id, 1800, '/');
+            }
+
+            echo("Sent sms using sendQuickSms method");
+            header('Location: http://' . $_SERVER['HTTP_HOST']);
+            exit;
+            //    $res = $sms->sendQuickSms($message, $phone);
+            //    _echo ("Sent sms using sendQuickSms method");
+        }
+    }
+}
+
+enter($phone);
+
   /** Get Balance / Получение баланса  */
-  if (true) {
+  if (false) {
     $res = $sms->getBalance();
     _echo("Requesting balance", "Balance = ".$res->result[0]->balance." ".$res->currency);
   }
 
-  if (true) {
-    $message = "Hello World! Powered by SMS.by";
-      setcookie("phone", $phone);
-//    $res = $sms->sendQuickSms($message, $phone);
-    echo ("Sent sms using sendQuickSms method");
-      header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
-//    _echo ("Sent sms using sendQuickSms method");
-  }
+
 
   /** Send simple Sms message / Отправка простого сообщения */
   if (false) {

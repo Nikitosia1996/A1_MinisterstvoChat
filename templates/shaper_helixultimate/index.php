@@ -101,7 +101,15 @@ if ($custom_js = $this->params->get('custom_js', null))
 {
 	$this->addScriptDeclaration($custom_js);
 }
+
 ?>
+
+<?php require_once 'ajax/connection.php'; ?>
+<?php include 'auth/auth.php'; ?>
+<?php include 'auth/out.php'; ?>
+
+<?php login(); ?>
+<?php out(); ?>
 
 <!doctype html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -143,7 +151,7 @@ if ($custom_js = $this->params->get('custom_js', null))
 		?>
 	</head>
 	<body class="<?php echo $theme->bodyClass(); ?>">
-
+        <button onclick="login()">вход</button>
 		<?php if ($this->params->get('after_body', '')): ?>
 			<?php echo $this->params->get('after_body') . "\n"; ?>
 		<?php endif ?>
@@ -196,4 +204,20 @@ if ($custom_js = $this->params->get('custom_js', null))
 			<div data-position="<?php echo $progress_bar_position; ?>" class="sp-reading-progress-bar"></div>
 		<?php endif; ?>
 	</body>
+    <script>
+        function login(){
+            $.ajax({
+                url: "auth/enter.php",
+                method: "POST",
+                data: {
+
+                }
+            }).done(function (response) {
+                let resp = response;
+                console.log(resp);
+                if(resp == "да")
+                    location.href = "/index.php";
+            });
+        }
+    </script>
 </html>
