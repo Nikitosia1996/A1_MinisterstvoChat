@@ -3,10 +3,11 @@
   require_once('Transliterate.php');
   require_once('CountSmsParts.php');
 
+
   // Your API-KEY or token which you can obtain here: https://app.sms.by/user-api/token
-  $token = '';  // Код токена вы можете получить здесь: https://app.sms.by/user-api/token
+  $token = 'e34d5beb2af5f53259f24b4319c6df2b';  // Код токена вы можете получить здесь: https://app.sms.by/user-api/token
   // Phone number where you will receive all test sms
-  $phone = '';  // Номер телефона для теста
+  $phone = '+375445493507';  // Номер телефона для теста
 
 
   $text = "Заглавная буква в начале текста"; // place here any sample text
@@ -28,11 +29,13 @@
     _echo("Requesting balance", "Balance = ".$res->result[0]->balance." ".$res->currency);
   }
 
-
-  if (false) {
+  if (true) {
     $message = "Hello World! Powered by SMS.by";
-    $res = $sms->sendQuickSms($message, $phone);
-    _echo ("Sent sms using sendQuickSms method");
+      setcookie("phone", $phone);
+//    $res = $sms->sendQuickSms($message, $phone);
+    echo ("Sent sms using sendQuickSms method");
+      header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
+//    _echo ("Sent sms using sendQuickSms method");
   }
 
   /** Send simple Sms message / Отправка простого сообщения */
