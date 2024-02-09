@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="title"
+			type="hidden"
+			label="JGLOBAL_TITLE"
+			size="40"
+			class="input-large-text"
+			default=""
+			required="true"
+		/>
+
+	</fieldset>
+	<fieldset name="permissions" label="Permissions" hiddenLabel="true">
+		<field
+			name="asset_id"
+			type="hidden"
+			filter="unset"
+		/>
+		<field
+			name="rules"
+			type="rules"
+			label="Permissions"
+			hiddenLabel="true"
+			translate_label="false"
+			filter="rules"
+			component="com_sppagebuilder"
+			section="page"
+			validate="rules"
+		/>
+
+	</fieldset>
+</form>
