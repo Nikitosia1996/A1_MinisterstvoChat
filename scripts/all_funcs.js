@@ -10,7 +10,7 @@ function showData(value) {
             orgList.innerHTML = "";
             let orgData = JSON.parse(response);
             let currentPage = 1;
-            let itemsPerPage = 5;
+            let itemsPerPage = 3;
             let totalPages = Math.ceil(orgData.length / itemsPerPage);
             // текущая страница
             function displayItems(page, data) {

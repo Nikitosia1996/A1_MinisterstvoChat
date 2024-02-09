@@ -2,5 +2,17 @@
     display: flex;
 }
 .subDiv1{
-    width:50%;
+    width:40%;
+    border-right: 1px solid;
+    padding: 0px 0px 0px 0px;
+}
+.subDiv2{
+    width:60%;
+    padding: 0px 0px 0px 50px;
+}
+.newZapros{
+display:flex;
+}
+.btnnewZapros{
+    margin-left: 50%;
 }
